@@ -1,15 +1,30 @@
 <html>
 	<head>
 		<title>Tom and Jerry</title>
+		<link href="http://fonts.googleapis.com/css?family=Poiret+One" rel="stylesheet" type="text/css">
 	</head>
 	<body>
 		<div class="main-container">
-			<div class="header"></div>
+			<div class="header">Comic #1</div>
 			
-			<div class="strip-container">
-				<canvas id="tom-and-jerry" height=200 width=200></canvas>
+			<h1>Warner Bros remake Tom and Jerry</h1>
+			
+			<div class="strip-items">
+				<div class="strip-container">
+					<canvas id="tom-and-jerry" height=200 width=200></canvas>
+					<div class="strip-text">I'm not the cat this neighbourhood wants.</div>
+					
+					<img src="tom.png" width=200 height=200>			
+				</div>
 				
-				<img src="tom.png" width=200 height=200>			
+				<div class="strip-container">
+					<canvas id="tom-and-jerry2" height=200 width=200></canvas>
+					<div class="strip-text bottom">No</div>
+				</div>
+				
+				<div class="strip-container">
+					<div class="strip-text">I'm the cat this neighbourhood deserves</div>
+				</div>
 			</div>
 			
 			<div class="footer-push"></div>
@@ -20,7 +35,9 @@
 			var fireParticles = [];
 			
 			var canvas = document.getElementById("tom-and-jerry");
+			var canvas2 = document.getElementById("tom-and-jerry2");
 			var ctx = canvas.getContext("2d");
+			var ctx2 = canvas2.getContext("2d");
 			
 			function addParticle(num){
 			
@@ -52,14 +69,14 @@
 			function clearParticles(){
 				var newOnes = [];
 				for(var i = 0; i < fireParticles.length; i++){
-					if(fireParticles[i].y > 0){
+					if(fireParticles[i].y > 0 && fireParticles[i].x < canvas.width + 30){
 						newOnes.push(fireParticles[i]);
 					}
 				}
 				fireParticles = newOnes;
 			}
 			
-			function draw(){
+			function frameOne(){
 				moveParticles();
 				clearParticles();
 			
@@ -74,9 +91,90 @@
 					ctx.fill();
 				}
 				
+				
 				if(fireParticles.length > 50000){
 					fireParticles.shift();
+				}	
+			}
+			
+			function drawBall(x,y,r, col,col2){
+				ctx2.beginPath();
+				var grad=ctx.createLinearGradient(x - r, y - r, x, y);
+				grad.addColorStop(0,col);
+				grad.addColorStop(1,col2);
+				ctx2.fillStyle=grad;
+			
+				ctx2.beginPath();
+				ctx2.arc(x, y, r, 0, 2 * Math.PI);
+				ctx2.fill();
+			}
+			
+			function droplets(){
+				for(var i = 0; i < t.length; i++){
+					if(t[i] / 100 > Math.PI / 2){
+						t[i] = 0;
+					}
+					
+					var x = 110 - 11 * Math.sin(t[i] / 20);			
+					if(t[i] / 100 > Math.PI / 7){
+						x += 10 * Math.sin(t[i] / 20) - 8;
+					}	
+					var val = (t[i]) / 50;
+					var y =70 + 110 * Math.sin(val / 2);	
+
+					ctx2.beginPath();
+					ctx2.arc(x, y, 4, 0, 2 * Math.PI);
+					ctx2.fill();	
 				}
+			}
+			
+			function eye(x,y){
+				drawBall(x,y,10,"white","gray");
+				drawBall(x-1,y, 5,"blue","rgb(102, 102, 135)");
+				drawBall(x-1,y,2,"white","black");
+			}
+			
+			function frameTwo(){
+				ctx2.clearRect(0,0, canvas.width, canvas.height);
+				
+				eye(98,64);
+				
+				drawBall(120,100,50,"rgb(153, 96, 62)","black");
+				drawBall(20,220,120,"rgb(153, 96, 62)","black");
+										
+				ctx2.beginPath();
+				ctx2.moveTo(110,70);
+				ctx2.bezierCurveTo(80, 110, 110, 120, 100, 180);
+				ctx2.lineTo(105,180);
+				ctx2.bezierCurveTo(110, 120, 90, 110, 110, 70);
+				var grad=ctx.createLinearGradient(50, 50, canvas2.width - 80, canvas2.height - 20);
+				grad.addColorStop(0,"red");
+				grad.addColorStop(1,"black");
+				ctx2.fillStyle=grad;
+				ctx2.strokeStyle = "darkred";
+				ctx2.fillStyle = grad;
+				ctx2.stroke();
+				ctx2.fill();	
+						
+				droplets();
+				
+				ctx2.beginPath();
+				ctx2.arc(110, 70, 10, 0, 2 * Math.PI);
+				ctx2.fillStyle= "black";
+				ctx2.fill();
+				
+				eye(110,70);
+			}
+			
+			var t = [0,20,50,110];
+			
+			function draw(){
+				for(var i = 0; i < t.length; i++){
+					t[i]++;
+				}
+				
+				frameOne();
+				frameTwo();
 				
 				window.requestAnimationFrame(draw);
 			}
@@ -85,20 +183,72 @@
 		</script>
 		
 		<style>
+			html, body{
+				min-height: 100%;
+				width: 100%;
+				margin: 0;
+				padding: 0;
+				font-family: 'Poiret One', cursive;
+				font-weight: 700;
+				text-align: center;
+			}
+		
+			.main-container{
+				min-height: 100%;
+			}
+			
+			.footer-push, .footer{
+				clear: both;
+				height: 50px;
+			}
+		
+			.header, .footer{
+				height: 50px;
+				background: black;
+				color: white;
+			}
+			
+			.header{
+				font-size: 30px;
+				line-height: 50px;
+				
+				text-align: center;
+			}
+			
+			.footer{
+				margin-top: -50px;
+			}
+		
+			.strip-items{
+				text-align: center;
+				margin: 50px;
+			}
+			
+			.strip-text{
+				width: 180px;
+				margin: 10px;
+				position: absolute;
+				top: 0;
+				left: 0;
+				background: white;
+			}
+			
+			.strip-text.bottom{
+				bottom: 0;
+				top:inherit;
+			}
+		
 			.strip-container{
 				position: relative;
 				width: 200px;
-				margin: auto;
+				display:inline-block;
 				background: black;
 				height: 200px;
 			}
 		
-			.strip-container canvas{
+			.strip-container canvas, .strip-container img{
 				position: absolute;
-			}
-			
-			.strip-container img{
-				position: absolute;
+				left: 0;
 			}
 		</style>
 	</body>
