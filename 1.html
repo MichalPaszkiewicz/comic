@@ -1,0 +1,99 @@
+<html>
+	<head>
+		<title>Tom and Jerry</title>
+	</head>
+	<body>
+		<div class="main-container">
+			<div class="header"></div>
+			
+			<div class="strip-container">
+				<canvas id="tom-and-jerry" height=200 width=200></canvas>
+				
+				<img src="tom.png" width=200 height=200>			
+			</div>
+			
+			<div class="footer-push"></div>
+		</div>
+		<div class="footer"></div>
+		
+		<script>
+			var fireParticles = [];
+			
+			var canvas = document.getElementById("tom-and-jerry");
+			var ctx = canvas.getContext("2d");
+			
+			function addParticle(){
+				var x = 200 * Math.random();
+				var y = canvas.height + 30;
+				var r = 30 * Math.random();
+				var red = 255;
+				var green = ~~(100 + 155 * Math.random());
+				var alpha = (0.5 + Math.random() / 2);
+				
+				fireParticles.push({x,y,r,red, green, alpha});
+			}
+			
+			function moveParticles(){
+				for(var i = 0; i < fireParticles.length; i++){
+					fireParticles[i].y-= Math.random();
+					fireParticles[i].x += 4 * Math.random() - 2;
+					fireParticles[i].r = Math.max(0.5, fireParticles[i].r -= (canvas.height / (20 * fireParticles[i].y)) * Math.random());
+					fireParticles[i].green = Math.max(fireParticles[i].green - 1, 0);
+					fireParticles[i].alpha -= 0.0001;
+				}
+			}
+			
+			function clearParticles(){
+				var newOnes = [];
+				for(var i = 0; i < fireParticles.length; i++){
+					if(fireParticles[i].y > 0){
+						newOnes.push(fireParticles[i]);
+					}
+				}
+				fireParticles = newOnes;
+			}
+			
+			function draw(){
+				moveParticles();
+				clearParticles();
+			
+				addParticle();
+				
+				ctx.clearRect(0,0, canvas.width, canvas.height);
+				
+				for(var i = 0; i < fireParticles.length; i++){	
+					ctx.beginPath();
+					ctx.arc(fireParticles[i].x,fireParticles[i].y,fireParticles[i].r,0, Math.PI * 2);
+					ctx.fillStyle = "rgba(" + fireParticles[i].red + "," + fireParticles[i].green + ",0," + fireParticles[i].alpha + ")";
+					ctx.fill();
+				}
+				
+				if(fireParticles.length > 50000){
+					fireParticles.shift();
+				}
+				
+				window.requestAnimationFrame(draw);
+			}
+			
+			draw();
+		</script>
+		
+		<style>
+			.strip-container{
+				position: relative;
+				width: 200px;
+				margin: auto;
+				background: black;
+				height: 200px;
+			}
+		
+			.strip-container canvas{
+				position: absolute;
+			}
+			
+			.strip-container img{
+				position: absolute;
+			}
+		</style>
+	</body>
+</html>
