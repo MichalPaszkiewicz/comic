@@ -9,21 +9,22 @@
 			
 			<h1>Warner Bros remake Tom and Jerry</h1>
 			
-			<div class="strip-items">
-				<div class="strip-container">
+			<div class="strip">
+				<div class="tile">
 					<canvas id="tom-and-jerry" height=200 width=200></canvas>
-					<div class="strip-text">I'm not the cat this neighbourhood wants.</div>
+					<div class="tile-text">I'm not the cat this neighbourhood wants.</div>
 					
 					<img src="tom.png" width=200 height=200>			
 				</div>
 				
-				<div class="strip-container">
+				<div class="tile">
 					<canvas id="tom-and-jerry2" height=200 width=200></canvas>
-					<div class="strip-text bottom">No</div>
+					<div class="tile-text bottom">No.</div>
 				</div>
 				
-				<div class="strip-container">
-					<div class="strip-text">I'm the cat this neighbourhood deserves</div>
+				<div class="tile">
+					<canvas id="tom-and-jerry3" height=200 width=200></canvas>
+					<div class="tile-text">I'm the cat this neighbourhood deserves</div>
 				</div>
 			</div>
 			
@@ -36,8 +37,10 @@
 			
 			var canvas = document.getElementById("tom-and-jerry");
 			var canvas2 = document.getElementById("tom-and-jerry2");
+			var canvas3 = document.getElementById("tom-and-jerry3");
 			var ctx = canvas.getContext("2d");
 			var ctx2 = canvas2.getContext("2d");
+			var ctx3 = canvas3.getContext("2d");
 			
 			function addParticle(num){
 			
@@ -130,15 +133,68 @@
 			
 			function eye(x,y){
 				drawBall(x,y,10,"white","gray");
+				ctx2.beginPath();
+				ctx2.moveTo(x - 7.1,y - 7.1);
+				ctx2.lineTo(x - 17, y + 5);
+				ctx2.lineTo(x - 9, y + 15);
+				ctx2.lineTo(x + 7.1, y + 7.1);
+				ctx2.fill();
 				drawBall(x-1,y, 5,"blue","rgb(102, 102, 135)");
 				drawBall(x-1,y,2,"white","black");
+			}
+			
+			function mouth(){
+				ctx2.strokeStyle="white";
+				var x = 100;
+				var y = 86;
+				var grad=ctx.createLinearGradient(x - 30, y - 30, x, y + 10);
+				grad.addColorStop(0,"rgb(178, 122, 58)");
+				grad.addColorStop(1,"black");
+				ctx2.fillStyle=grad;
+				ctx2.beginPath();
+				ctx2.moveTo(x, y);
+				ctx2.bezierCurveTo(x - 5,y - 15,x -20,y -21,x-=22,y-=18);
+				ctx2.bezierCurveTo(x - 5, y - 3, x - 15, y+10, x-=8,y+=20);
+				ctx2.bezierCurveTo(x + 5, y + 10, x + 20, y + 15, 100,86);
+				ctx2.fill();
+				
+				ctx2.beginPath();
+				drawBall(75, 68, 5, "white","black");
+				
+				var x0 = x = 85;
+				var y0 = y = 100;
+				grad=ctx.createLinearGradient(x - 30, y - 30, x, y + 10);
+				grad.addColorStop(0,"rgb(178, 122, 58)");
+				grad.addColorStop(1,"black");
+				ctx2.fillStyle=grad;
+				ctx2.beginPath();
+				ctx2.moveTo(x, y);
+				ctx2.bezierCurveTo(x - 5,y - 15,x -20,y -21,x-=12,y-=15);
+				ctx2.bezierCurveTo(x, y - 3, x - 15, y+10, x-=8,y+=12);
+				ctx2.bezierCurveTo(x + 5, y + 10, x + 15, y + 12, x0,y0);
+				ctx2.fill();
+			}
+			
+			function whiskers(){
+				ctx2.beginPath();
+				ctx2.strokeStyle="black";
+				ctx2.moveTo(94,83);
+				ctx2.bezierCurveTo(95,81,120,90,145,87);
+				ctx2.moveTo(90,85);
+				ctx2.bezierCurveTo(108,88,115,92,140,105);
+				ctx2.moveTo(88,91);
+				ctx2.bezierCurveTo(93,94,105,90,130,120);
+				ctx2.stroke();
 			}
 			
 			function frameTwo(){
 				ctx2.clearRect(0,0, canvas.width, canvas.height);
 				
+				drawBall(140,90,50,"rgb(48, 29, 13)","black");
+				
 				eye(98,64);
 				
+				drawBall(46,148,50,"rgb(153, 96, 62)","black");
 				drawBall(120,100,50,"rgb(153, 96, 62)","black");
 				drawBall(20,220,120,"rgb(153, 96, 62)","black");
 										
@@ -164,6 +220,109 @@
 				ctx2.fill();
 				
 				eye(110,70);
+				mouth();
+				
+				drawBall(180,110,55,"rgb(48, 29, 13)","black");
+				drawBall(180,110,50,"black","rgb(48, 29, 13)");
+				
+				whiskers();
+			}
+			
+			function f3bg(){
+				var grad=ctx3.createLinearGradient(0, 0, 0, canvas3.height);
+				grad.addColorStop(0,"rgb(62,62,72)");
+				grad.addColorStop(1,"rgb(15,15,25)");
+				ctx3.fillStyle=grad;
+				
+				ctx3.beginPath();
+				ctx3.rect(0,0,canvas3.width, canvas3.height);
+				ctx3.fill();
+			}
+			
+			var rainParticles = [];
+			
+			for(var i = 0; i < 20; i++){
+				rainParticles.push({x: canvas.width * (2 * Math.random()-1),y: canvas.height * Math.random(),r:1});
+			}
+			
+			function f3moveRain(){
+				for(var i = 0; i < rainParticles.length; i++){
+					rainParticles[i].x+=5;
+					rainParticles[i].y+=10;
+				}
+			}
+			
+			function f3setRain(){
+				var newRain = [];
+				for(var i = 0; i < rainParticles.length; i++){
+					if(rainParticles[i].y > canvas3.height + 20){
+						newRain.push({x: canvas.width * (2 * Math.random() - 1), y: 0, r: 1});
+					}
+					else{
+						newRain.push(rainParticles[i]);
+					}
+				}
+				rainParticles = newRain;
+			}
+			
+			function f3rain(s,f){			
+				ctx3.shadowBlur = 5;
+				ctx3.shadowColor="rgb(30,30,50)";
+				
+				for(var i = s; i < f; i++){
+					var rp = rainParticles[i];
+					
+					for(var j = 0; j < 12; j++){
+						ctx3.beginPath();
+						var r = (200 - 3 * j);
+						var g = r;
+						var b = r;
+						ctx3.fillStyle="rgba(" + r + "," + g + "," + b + ",0.3)";
+						ctx3.arc(rp.x - j,rp.y - 2 * j,rp.r,0,Math.PI * 2);
+						ctx3.fill();
+					}
+					
+				}
+			}
+			
+			function f3lightning(){
+				if(t[0] == 6 || t[0] == 12 || t[0] == 16){
+					ctx3.fillStyle="rgba(120,120,98,0.8)";
+					ctx3.rect(0,0,canvas.width, canvas.height);
+					ctx3.fill();
+				}
+			}
+			
+			function f3drawing(){
+				ctx3.beginPath();
+				ctx3.fillStyle="black";
+				ctx3.shadowBlur=0;
+				ctx3.arc(100,100,20,0,2 * Math.PI);
+				ctx3.fill();
+				ctx3.beginPath();
+				ctx3.arc(120,85,15,0,2 * Math.PI);
+				ctx3.fill();
+				ctx3.beginPath();
+				ctx3.arc(80,85,15,0,2 * Math.PI);
+				ctx3.fill();
+				ctx3.beginPath();
+				ctx3.arc(100,150,40,0,2 * Math.PI);
+				ctx3.fill();
+			}
+			
+			function frameThree(){
+				f3bg();
+				
+				f3moveRain();
+				f3setRain();
+				
+				f3rain(0,10);
+				
+				f3drawing();
+				
+				f3rain(11,rainParticles.length);
+				
+				f3lightning();
 			}
 			
 			var t = [0,20,50,110];
@@ -175,6 +334,7 @@
 				
 				frameOne();
 				frameTwo();
+				frameThree();
 				
 				window.requestAnimationFrame(draw);
 			}
@@ -219,26 +379,26 @@
 				margin-top: -50px;
 			}
 		
-			.strip-items{
+			.strip{
 				text-align: center;
 				margin: 50px;
 			}
 			
-			.strip-text{
+			.tile-text{
 				width: 180px;
 				margin: 10px;
 				position: absolute;
 				top: 0;
 				left: 0;
-				background: white;
+				background: rgba(255,255,255,0.8);
 			}
 			
-			.strip-text.bottom{
+			.tile-text.bottom{
 				bottom: 0;
 				top:inherit;
 			}
 		
-			.strip-container{
+			.tile{
 				position: relative;
 				width: 200px;
 				display:inline-block;
@@ -246,7 +406,7 @@
 				height: 200px;
 			}
 		
-			.strip-container canvas, .strip-container img{
+			.tile canvas, .tile img{
 				position: absolute;
 				left: 0;
 			}
