@@ -1,8 +1,9 @@
 var fs = require('fs');
+var sys = require("sys");
 
 var args = process.argv;
 
-function moveFiles(){
+function moveFiles(keepAll){
 	console.log("\r\n* Moving files\r\n");
 	function copyFile(source, folder, cb, unlink) {
 		if (!fs.existsSync(folder + "")) {
@@ -24,12 +25,13 @@ function moveFiles(){
 			done(err);
 		});
 		wr.on("close", function (ex) {
-			done("complete");
+			// do nothing
+			//done("complete");
 		});
 		rd.pipe(wr);
 		
 		if(unlink){
-			fs.unlink(source, done);
+			fs.unlink(source);
 		}
 		
 		function done(err) {
@@ -50,14 +52,16 @@ function moveFiles(){
 			maxFile = parseInt(files[i]);
 		}
 		else{
-			if("strip.js, .git, LICENSE".indexOf(files[i]) == -1){
+			if("strip.js, .git, LICENSE, master.html, tile.html".indexOf(files[i]) == -1){
 				otherFiles.push(files[i]);
 			}
 		}
 	}
 
 	for(var i = 0; i < otherFiles.length; i++){
-		copyFile(otherFiles[i], maxFile + 1, console.log, true);
+		var keepOriginal = keepAll || otherFiles[i] == "styles.css";
+		var unlink = !keepOriginal;
+		copyFile(otherFiles[i], maxFile + 1, console.log, unlink);
 	}
 }
 
@@ -65,30 +69,43 @@ function createNewBlank(){
 	console.log("\r\n* Creating new blank file\r\n");
 }
 
-function badInputMessage(){
+function commandMessage(){
 	console.log("\r\n\r\n");
 	console.log("\t******************************");
 	console.log("\t********** COMMANDS **********");
 	console.log("\t******************************\r\n\r\n");
 	console.log("\tmove \t-- moves current directory into next sub folder");
+	console.log("\tcopy \t-- copies current directory into next sub folder");
 	console.log("\tnew \t-- creates new blank strip");
 	console.log("\r\n\r\n");
 }
 
-if(args.length > 2){
-	
-	switch(args[2]){
+function control(value){	
+	switch(value){
 		case "move":
-			moveFiles();
+			moveFiles(false);
+			break;
+		case "copy":
+			moveFiles(true);
 			break;
 		case "new":
 			createNewBlank();
 			break;
 		default:
-			badInputMessage();
+			console.log("Incorrect input. Please use one of the following commands:");
+			commandMessage();
 	}	
 }
+
+if(args.length > 2){	
+	control(args[2]);
+}
 else{
-	badInputMessage();
+	commandMessage();
 }
 
+var stdin = process.openStdin();
+
+stdin.addListener("data", function(d) {
+	control(d.toString().replace("\r","").replace("\n",""));
+});
