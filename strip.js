@@ -8,10 +8,7 @@ function moveFiles(keepAll){
 	function copyFile(source, folder, cb, unlink) {
 		if (!fs.existsSync(folder + "")) {
 			fs.mkdirSync(folder + "", 0766, function (err) {
-				if (err) {
-					done(err);
-					response.send("ERROR! Can't make the directory! \n");    // echo the result back
-				}
+				if (err) {	done(err);	}
 			});
 		}
 		var cbCalled = false;
@@ -52,7 +49,7 @@ function moveFiles(keepAll){
 			maxFile = parseInt(files[i]);
 		}
 		else{
-			if("strip.js, .git, LICENSE, master.html, tile.html".indexOf(files[i]) == -1){
+			if("strip.js, .git, LICENSE, templates, master.html, tile.html, canvas.js".indexOf(files[i]) == -1){
 				otherFiles.push(files[i]);
 			}
 		}
@@ -67,6 +64,54 @@ function moveFiles(keepAll){
 
 function createNewBlank(){
 	console.log("\r\n* Creating new blank file\r\n");
+	
+	var numberOfItems = 3;
+	
+	fs.readFile('templates/master.html', function(err, dataMaster){
+		console.log("Writing index");
+		if(err){ throw err; }
+		
+		var masterString = dataMaster.toString();
+	
+		fs.readFile('templates/tile.html', function(err, dataTile){
+			if(err){ throw err; }
+			console.log("Getting tile");
+			
+			var tileString = dataTile.toString();
+			var allTiles = "";
+			
+			for(var i = 0; i < numberOfItems; i++){
+				allTiles += tileString.replace("{TILENO}", i + "").replace("{TEXT}","{TXT}")
+			}
+			
+			masterString = masterString.replace("{TILES}", allTiles);
+				
+			fs.writeFile("index.html", masterString, function(err) {
+				if(err) {	return console.log(err);	}
+
+				console.log("The file was saved!\r\n");
+			}); 
+		});
+	
+	})
+	
+	fs.readFile('templates/canvas.js', function(err, dataJS){
+		console.log("Writing js");
+		if(err){	throw err;	}
+		
+		var canvasString = dataJS.toString();
+		var jsString = "";
+		
+		for(var i = 0; i < numberOfItems; i++){
+			jsString += canvasString.replace(/{TILENO}/g, i + "");
+		}
+		
+		fs.writeFile("script.js", jsString, function(err) {
+			if(err) {	return console.log(err);	}
+        
+			console.log("The file was saved!\r\n");
+		}); 
+	});
 }
 
 function commandMessage(){
@@ -77,6 +122,7 @@ function commandMessage(){
 	console.log("\tmove \t-- moves current directory into next sub folder");
 	console.log("\tcopy \t-- copies current directory into next sub folder");
 	console.log("\tnew \t-- creates new blank strip");
+	console.log("\tclear \t-- clears console");
 	console.log("\r\n\r\n");
 }
 
@@ -90,6 +136,9 @@ function control(value){
 			break;
 		case "new":
 			createNewBlank();
+			break;
+		case "clear":
+			console.log('\033[2J');
 			break;
 		default:
 			console.log("Incorrect input. Please use one of the following commands:");
