@@ -89,7 +89,7 @@ function createNewBlank(){
 			fs.writeFile("index.html", masterString, function(err) {
 				if(err) {	return console.log(err);	}
 
-				console.log("The file was saved!\r\n");
+				console.log("The index was saved!\r\n");
 			}); 
 		});
 	
@@ -101,15 +101,21 @@ function createNewBlank(){
 		
 		var canvasString = dataJS.toString();
 		var jsString = "";
+		var drawingString = "\r\nfunction draw(){\r\n"
 		
 		for(var i = 0; i < numberOfItems; i++){
-			jsString += canvasString.replace(/{TILENO}/g, i + "");
+			jsString += canvasString.replace(/{TILENO}/g, i + "") + "\r\n";
+			drawingString += "drawTile" + i + "();\r\n";
 		}
+		
+		drawingString += "window.requestAnimationFrame(draw);\r\n}\r\n\r\ndraw();";
+		
+		jsString += drawingString;
 		
 		fs.writeFile("script.js", jsString, function(err) {
 			if(err) {	return console.log(err);	}
         
-			console.log("The file was saved!\r\n");
+			console.log("The script file was saved!\r\n");
 		}); 
 	});
 }
