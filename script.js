@@ -3,9 +3,11 @@
 			var canvas = document.getElementById("tom-and-jerry");
 			var canvas2 = document.getElementById("tom-and-jerry2");
 			var canvas3 = document.getElementById("tom-and-jerry3");
+			var canvas4 = document.getElementById("tom-and-jerry4");
 			var ctx = canvas.getContext("2d");
 			var ctx2 = canvas2.getContext("2d");
 			var ctx3 = canvas3.getContext("2d");
+			var ctx4 = canvas4.getContext("2d");
 			
 			function addParticle(num){
 			
@@ -262,16 +264,25 @@
 				ctx3.beginPath();
 				ctx3.fillStyle="black";
 				ctx3.shadowBlur=0;
-				ctx3.arc(100,100,20,0,2 * Math.PI);
+				ctx3.arc(90,105,20,0,2 * Math.PI);
 				ctx3.fill();
 				ctx3.beginPath();
-				ctx3.arc(120,85,15,0,2 * Math.PI);
+				ctx3.arc(110,105,3,0,2 * Math.PI);
 				ctx3.fill();
 				ctx3.beginPath();
-				ctx3.arc(80,85,15,0,2 * Math.PI);
+				ctx3.arc(85,85,15,0,2 * Math.PI);
 				ctx3.fill();
 				ctx3.beginPath();
-				ctx3.arc(100,150,40,0,2 * Math.PI);
+				ctx3.arc(70,90,15,0,2 * Math.PI);
+				ctx3.fill();
+				ctx3.beginPath();
+				ctx3.arc(80,150,40,0,2 * Math.PI);
+				ctx3.fill();
+				ctx3.beginPath();
+				ctx3.moveTo(40,150);
+				ctx3.lineTo(50,200);
+				ctx3.lineTo(110,200);
+				ctx3.lineTo(120,150);
 				ctx3.fill();
 			}
 			
@@ -290,6 +301,18 @@
 				f3lightning();
 			}
 			
+			function frameFour(){
+				ctx4.beginPath();
+				ctx4.rect(0,0,canvas4.width, canvas4.height);
+				ctx4.fillStyle= "black";
+				ctx4.fill();
+				ctx4.beginPath();
+				ctx4.fillStyle= "rgba(230,230,230,0.1)";
+				ctx4.arc(canvas4.width/2, canvas4.height/2,20,0,2 * Math.PI);
+				ctx4.arc(canvas4.width/2 + 30, canvas4.height/2,20,0,2 * Math.PI);
+				ctx4.fill();
+			}
+			
 			var t = [0,20,50,110];
 			
 			function draw(){
@@ -300,6 +323,7 @@
 				frameOne();
 				frameTwo();
 				frameThree();
+				frameFour();
 				
 				window.requestAnimationFrame(draw);
 			}
