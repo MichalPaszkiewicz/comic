@@ -1,6 +1,6 @@
 var fs = require('fs');
 
-function copyFile(source, folder, cb) {
+function copyFile(source, folder, cb, unlink) {
     if (!fs.existsSync(folder + "")) {
         fs.mkdirSync(folder + "", 0766, function (err) {
             if (err) {
@@ -24,8 +24,10 @@ function copyFile(source, folder, cb) {
     });
     rd.pipe(wr);
 	
-	fs.unlink(rd, done);
-
+	if(unlink){
+		fs.unlink(source, done);
+	}
+	
     function done(err) {
         if (!cbCalled) {
             cb(err);
@@ -51,7 +53,8 @@ for(var i = 0; i < files.length; i++){
 }
 
 for(var i = 0; i < otherFiles.length; i++){
-	copyFile(otherFiles[i], maxFile + 1, console.log);
+	var unlink = otherFiles[i] != "styles.css";
+	copyFile(otherFiles[i], maxFile + 1, console.log, unlink);
 }
 
 
