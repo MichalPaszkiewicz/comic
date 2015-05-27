@@ -21,10 +21,10 @@
 			<div class="header">Comic #{NUMBER}</div>
 			
 			<div class="navigation">
-				<div class="button">&lArr;</div>
-				<div class="button">&larr;</div>
-				<div class="button">&rarr;</div>
-				<div class="button">&rArr;</div>
+				<div class="button" onclick="go('/comic/1')">&lArr;</div>
+				<div class="button" onclick="go(-1)">&larr;</div>
+				<div class="button" onclick="go(1)">&rarr;</div>
+				<div class="button" onclick="go('/comic')">&rArr;</div>
 			</div>
 			
 			<h1>{NAME}</h1>
@@ -41,6 +41,17 @@
 			<a href="http://www.michalpaszkiewicz.co.uk">By Michal Paszkiewicz</a>
 		</div>
 		
+		<script>
+			function go(url){
+				if(isNaN(url)){
+					window.location = url;
+				}
+				else{
+				
+					}
+				}
+			}
+		</script>
 		<script src="script.js"></script>
 	</body>
 </html>

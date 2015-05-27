@@ -21,10 +21,10 @@
 			<div class="header">Comic #1</div>
 			
 			<div class="navigation">
-				<div class="button">&lArr; &lArr;</div>
-				<div class="button">&lArr;</div>
-				<div class="button">&rArr;</div>
-				<div class="button">&rArr;&rArr;</div>
+				<div class="button" onclick="go('/comic/1')">&lArr;</div>
+				<div class="button" onclick="go(-1)">&larr;</div>
+				<div class="button" onclick="go(1)">&rarr;</div>
+				<div class="button" onclick="go('/comic')">&rArr;</div>
 			</div>
 			
 			<h1>If Warner Bros remade Tom and Jerry</h1>
@@ -60,6 +60,17 @@
 			<a href="http://www.michalpaszkiewicz.co.uk">By Michal Paszkiewicz</a>
 		</div>
 		
+		<script>
+			function go(url){
+				if(isNaN(url)){
+					window.location = url;
+				}
+				else{
+				
+					}
+				}
+			}
+		</script>
 		<script src="script.js"></script>
 	</body>
 </html>
