@@ -17,16 +17,20 @@ html, body{
 	height: 50px;
 }
 
-.header, .footer{
+.header, .footer, .footer a{
 	height: 50px;
 	background: black;
 	color: white;
+	text-decoration: none;
+	line-height: 50px;
+}
+
+.footer a:hover{
+	text-decoration: underline;
 }
 
 .header{
 	font-size: 30px;
-	line-height: 50px;
-	
 	text-align: center;
 }
 
