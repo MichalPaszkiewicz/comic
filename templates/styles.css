@@ -69,3 +69,24 @@ html, body{
 	position: absolute;
 	left: 0;
 }
+
+.navigation{
+	margin: 10px;
+}
+
+.navigation .button{
+	margin: 5px;
+	display: inline-block;
+	background: rgb(67, 63, 63);
+	color: white;
+	padding: 5px 15px;
+	font-size: 30px;
+	border-radius: 5px;
+	cursor: pointer;
+	box-shadow: 0 0 2px 2px black;
+}
+
+.navigation .button:hover{
+	background: black;
+	box-shadow: 0 0 2px 1px black;;
+}
