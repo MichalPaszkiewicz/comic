@@ -262,27 +262,81 @@
 			
 			function f3drawing(){
 				ctx3.beginPath();
-				ctx3.fillStyle="black";
+				var grad=ctx3.createLinearGradient(canvas3.width, 50, 20, canvas3.height);
+				grad.addColorStop(0,"rgb(82, 59, 34)");
+				grad.addColorStop(1,"black");
+				ctx3.fillStyle=grad;
 				ctx3.shadowBlur=0;
-				ctx3.arc(90,105,20,0,2 * Math.PI);
+				ctx3.arc(80,105,20,0,2 * Math.PI);
 				ctx3.fill();
 				ctx3.beginPath();
-				ctx3.arc(110,105,3,0,2 * Math.PI);
+				ctx3.arc(100,105,3,0,2 * Math.PI);
 				ctx3.fill();
 				ctx3.beginPath();
-				ctx3.arc(85,85,15,0,2 * Math.PI);
+				ctx3.arc(75,85,15,0,2 * Math.PI);
 				ctx3.fill();
 				ctx3.beginPath();
-				ctx3.arc(70,90,15,0,2 * Math.PI);
+				ctx3.arc(60,90,15,0,2 * Math.PI);
 				ctx3.fill();
 				ctx3.beginPath();
-				ctx3.arc(80,150,40,0,2 * Math.PI);
+				ctx3.arc(70,150,40,0,2 * Math.PI);
 				ctx3.fill();
 				ctx3.beginPath();
-				ctx3.moveTo(40,150);
-				ctx3.lineTo(50,200);
-				ctx3.lineTo(110,200);
-				ctx3.lineTo(120,150);
+				ctx3.moveTo(30,150);
+				ctx3.lineTo(40,200);
+				ctx3.lineTo(100,200);
+				ctx3.lineTo(110,150);
+				ctx3.fill();
+				// arm
+				ctx3.beginPath();
+				ctx3.moveTo(95,120);
+				ctx3.lineTo(120,135);
+				ctx3.lineTo(160,120);
+				ctx3.lineTo(160,130);
+				ctx3.bezierCurveTo(114,170,108,170,80,140);
+				ctx3.fill();
+				// cheese
+				ctx3.beginPath();
+				grad=ctx3.createLinearGradient(canvas.width, 80, 180, 150);
+				grad.addColorStop(0,"#A9A900");
+				grad.addColorStop(1,"black");
+				ctx3.fillStyle=grad;
+				ctx3.moveTo(163, 100);
+				ctx3.lineTo(183, 100);
+				ctx3.lineTo(183, 120);
+				ctx3.lineTo(163, 120);
+				ctx3.lineTo(163, 0);
+				ctx3.closePath();
+				//holes
+				ctx3.arc(168,105,1,0,2 * Math.PI, true);
+				ctx3.closePath();
+				ctx3.arc(180,109,1,0,2 * Math.PI, true);
+				ctx3.closePath();
+				ctx3.arc(166,112,3,0,2 * Math.PI, true);
+				ctx3.closePath();
+				ctx3.arc(178,118,2,0,2 * Math.PI, true);
+				ctx3.closePath();
+				ctx3.arc(175,101,1.5,0,2 * Math.PI, true);
+				ctx3.closePath();
+				ctx3.fill();
+				//hand
+				grad=ctx3.createLinearGradient(canvas3.width, 50, 20, canvas3.height);
+				grad.addColorStop(0,"rgb(82, 59, 34)");
+				grad.addColorStop(1,"black");
+				ctx3.fillStyle=grad;
+				ctx3.beginPath();
+				ctx3.moveTo(160,120);
+				ctx3.bezierCurveTo(161,110,165,122,170,118);
+				ctx3.bezierCurveTo(172,115,177,120,185,115);
+				ctx3.bezierCurveTo(190,114,180,125,185,123);
+				ctx3.bezierCurveTo(180,125,170,120,160,130);
+				ctx3.fill();
+				//right hand(left for viewer);
+				ctx3.beginPath();
+				ctx3.moveTo(40,125);
+				ctx3.lineTo(10,200);
+				ctx3.lineTo(10,210);
+				ctx3.lineTo(50,170);
 				ctx3.fill();
 			}
 			
@@ -294,22 +348,56 @@
 				
 				f3rain(0,10);
 				
+				f3lightning();
+				
 				f3drawing();
 				
 				f3rain(11,rainParticles.length);
-				
-				f3lightning();
+			}
+			
+			var buildings = [];
+			
+			for(var i = 0; i < 5; i++){
+				buildings.push({x:Math.random() * 200, h:Math.random() * 70, w: Math.random() * 30 + 15});
+			}
+			
+			for(var i = 0; i < 10; i++){
+				buildings.push({x:Math.random() * 200, h:Math.random() * 10, w: Math.random() * 10 + 10});
 			}
 			
 			function frameFour(){
 				ctx4.beginPath();
 				ctx4.rect(0,0,canvas4.width, canvas4.height);
-				ctx4.fillStyle= "black";
+				ctx4.fillStyle= "#300";
 				ctx4.fill();
+				
+				for(var i = 0; i < fireParticles.length; i++){	
+					ctx4.beginPath();
+					ctx4.arc(fireParticles[i].x,fireParticles[i].y - 40,fireParticles[i].r,0, Math.PI * 2);
+					ctx4.fillStyle = "rgba(" + fireParticles[i].red + "," + fireParticles[i].green + ",0," + fireParticles[i].alpha + ")";
+					ctx4.fill();
+				}
+				
+				ctx4.fillStyle="black";
 				ctx4.beginPath();
-				ctx4.fillStyle= "rgba(230,230,230,0.1)";
-				ctx4.arc(canvas4.width/2, canvas4.height/2,20,0,2 * Math.PI);
-				ctx4.arc(canvas4.width/2 + 30, canvas4.height/2,20,0,2 * Math.PI);
+				ctx4.rect(0,canvas.height,canvas.width,-5);
+				ctx4.fill();
+				for(var i = 0; i < buildings.length;i++){
+					ctx4.beginPath();
+					ctx4.rect(buildings[i].x,canvas.height-5,buildings[i].w,-buildings[i].h);
+					ctx4.fill();
+				}
+				
+				ctx4.fill();
+				ctx4.fillStyle="#181414";
+				ctx4.beginPath();
+				ctx4.rect(10,200,20,-40);			
+				ctx4.rect(30,200,20,-40);		
+				ctx4.rect(60,200,20,-30);
+				ctx4.rect(90,200,20,-10);
+				ctx4.rect(120,200,20,-60);
+				ctx4.rect(60,200,20,-40);
+				ctx4.rect(160,200,120,-30);
 				ctx4.fill();
 			}
 			
