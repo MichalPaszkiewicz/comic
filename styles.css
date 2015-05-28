@@ -101,3 +101,11 @@ html, body{
 	background: gray;
 	box-shadow: 0 0 2px 2px black;
 }
+
+.link{
+	margin: 10px;
+	padding: 10px 20px;
+	background: rgb(188, 188, 215);
+	display: inline-block;
+	border-radius: 5px;
+}
