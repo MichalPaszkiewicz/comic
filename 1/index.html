@@ -1,8 +1,8 @@
 <html>
 	<head>
-		<title>{NAME}</title>
+		<title>Tom and Jerry</title>
 		<link href="http://fonts.googleapis.com/css?family=Poiret+One" rel="stylesheet" type="text/css">
-		<meta name="description" content="{DESCRIPTION}">
+		<meta name="description" content="If Warner Bros remade Tom and Jerry - Comic #1 by Michal Paszkiewicz">
 		<link href="styles.css" rel="stylesheet" type="text/css">
 		<meta name="viewport" content="width=300, initial-scale=1.0">
 		<script>
@@ -18,7 +18,7 @@
 	</head>
 	<body>
 		<div class="main-container">
-			<div class="header">Comic #{NUMBER}</div>
+			<div class="header">Comic #1</div>
 			
 			<div class="navigation">
 				<div class="button back" onclick="go('/comic/1')">&lArr;</div>
@@ -27,21 +27,31 @@
 				<div class="button forward" onclick="go('/comic')">&rArr;</div>
 			</div>
 			
-			<h1>{NAME}</h1>
+			<h1>If Warner Bros remade Tom and Jerry</h1>
 			
 			<div class="strip">
-
-								<div class="tile">
-					<canvas id="canvas0" height=200 width=200></canvas>
-					<div class="tile-text">{TXT}</div>		
-				</div>				<div class="tile">
-					<canvas id="canvas1" height=200 width=200></canvas>
-					<div class="tile-text">{TXT}</div>		
-				</div>				<div class="tile">
-					<canvas id="canvas2" height=200 width=200></canvas>
-					<div class="tile-text">{TXT}</div>		
+				<div class="tile" title="Everyone would prefer to watch Itchy and Scratchy.">
+					<canvas id="tom-and-jerry4" height=200 width=200></canvas>
+					<div class="tile-text">I am not the cat this neighbourhood wants.</div>						
 				</div>
-
+				
+				<div class="tile" title="Starring Christian Bale as Tom">
+					<canvas id="tom-and-jerry" height=200 width=200></canvas>
+					<img src="tom.png" width=200 height=200>	
+					<div class="tile-text">I am the cat this neighbourhood deserves.</div>
+					<div class="tile-text bottom">There is only one problem here.</div>
+				</div>
+			</div>
+			
+			<div class="strip">
+				<div class="tile" title="and Johnny Depp as Jerry">
+					<canvas id="tom-and-jerry3" height=200 width=200></canvas>
+					<div class="tile-text">Does Jerry bleed?</div>
+				</div>
+				<div class="tile" title="Animals may have been hurt during production, but not by anyone involved in creating this comic strip.">
+					<canvas id="tom-and-jerry2" height=200 width=200></canvas>
+					<div class="tile-text bottom">I will make him bleed.</div>
+				</div>
 			</div>
 			
 			<div class="footer-push"></div>
@@ -90,7 +100,7 @@
 					else if(url == -1){
 						//if moving back:
 						if(finalURL == "" || finalURL == "index.html"){
-							window.location = "/comic/" + 1;	
+							window.location = "/comic/" + {LASTNUM};	
 						}
 						else if(parseInt(finalURL) == 1){
 							return;

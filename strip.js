@@ -45,11 +45,11 @@ function moveFiles(keepAll){
 	var otherFiles = [];
 
 	for(var i = 0; i < files.length; i++){
-		if(parseInt(files[i]) > maxFile){
+		if(files[i].indexOf("html") == -1 && parseInt(files[i]) > maxFile){
 			maxFile = parseInt(files[i]);
 		}
 		else{
-			if("strip.js, .git, LICENSE, templates, master.html, tile.html, canvas.js".indexOf(files[i]) == -1){
+			if("strip.js, .git, LICENSE, templates, master.html, tile.html, canvas.js, 404.html".indexOf(files[i]) == -1){
 				otherFiles.push(files[i]);
 			}
 		}
@@ -67,11 +67,21 @@ function createNewBlank(){
 	
 	var numberOfItems = 3;
 	
+	var files = fs.readdirSync(__dirname);
+
+	var maxFile = 0;
+
+	for(var i = 0; i < files.length; i++){
+		if(files[i].indexOf("html") == -1 && parseInt(files[i]) > maxFile){
+			maxFile = parseInt(files[i]);
+		}
+	}
+	
 	fs.readFile('templates/master.html', function(err, dataMaster){
 		console.log("Writing index");
 		if(err){ throw err; }
 		
-		var masterString = dataMaster.toString();
+		var masterString = dataMaster.toString().replace("{LASTNUM}", maxFile);
 	
 		fs.readFile('templates/tile.html', function(err, dataTile){
 			if(err){ throw err; }
@@ -81,7 +91,7 @@ function createNewBlank(){
 			var allTiles = "";
 			
 			for(var i = 0; i < numberOfItems; i++){
-				allTiles += tileString.replace("{TILENO}", i + "").replace("{TEXT}","{TXT}")
+				allTiles += tileString.replace("{TILENO}", i + "").replace("{TEXT}","{TXT}");
 			}
 			
 			masterString = masterString.replace("{TILES}", allTiles);

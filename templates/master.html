@@ -21,10 +21,10 @@
 			<div class="header">Comic #{NUMBER}</div>
 			
 			<div class="navigation">
-				<div class="button" onclick="go('/comic/1')">&lArr;</div>
-				<div class="button" onclick="go(-1)">&larr;</div>
-				<div class="button" onclick="go(1)">&rarr;</div>
-				<div class="button" onclick="go('/comic')">&rArr;</div>
+				<div class="button back" onclick="go('/comic/1')">&lArr;</div>
+				<div class="button back" onclick="go(-1)">&larr;</div>
+				<div class="button forward" onclick="go(1)">&rarr;</div>
+				<div class="button forward" onclick="go('/comic')">&rArr;</div>
 			</div>
 			
 			<h1>{NAME}</h1>
@@ -42,12 +42,57 @@
 		</div>
 		
 		<script>
+			var finalURL = window.location.pathname.split("comic/")[1];
+			
+			function greyOutButtons(){
+				var items = [];
+				if(finalURL == "" || finalURL == "index.html"){
+					// grey out forward buttons
+					items = document.getElementsByClassName("forward");
+				}
+				else{
+					if(parseInt(finalURL) == 1){
+						// grey out backward buttons
+						items = document.getElementsByClassName("back");
+					}
+				}
+				for(var i = 0; i < items.length; i++){
+					items[i].className += " grey";
+				}
+			}
+			
+			greyOutButtons();
+		
 			function go(url){
 				if(isNaN(url)){
 					window.location = url;
 				}
 				else{
-				
+					if(url == 1){
+						//if moving forward:
+						if(finalURL == "" || finalURL == "index.html"){
+							// do nothing
+							return;
+						}
+						else{
+							window.location = "/comic/" + (parseInt(finalURL) + 1);
+						}
+					}
+					else if(url == -1){
+						//if moving back:
+						if(finalURL == "" || finalURL == "index.html"){
+							window.location = "/comic/" + {LASTNUM};	
+						}
+						else if(parseInt(finalURL) == 1){
+							return;
+						}
+						else{	
+							window.location = "/comic/" + (parseInt(finalURL) - 1);
+						}
+					}
+					else{
+						console.log("Bad URL: " + url);
+					}
 				}
 			}
 		</script>

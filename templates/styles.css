@@ -90,3 +90,14 @@ html, body{
 	background: black;
 	box-shadow: 0 0 2px 1px black;;
 }
+
+.button.grey{
+	background: gray;
+	opacity: 0.3;
+	cursor: default;
+}
+
+.button.grey:hover{
+	background: gray;
+	box-shadow: 0 0 2px 2px black;
+}
