@@ -81,7 +81,7 @@ function createNewBlank(){
 		console.log("Writing index");
 		if(err){ throw err; }
 		
-		var masterString = dataMaster.toString().replace("{LASTNUM}", maxFile);
+		var masterString = dataMaster.toString().replace(/{LASTNUM}/g, maxFile).replace(/{NUMBER}/g,(maxFile + 1));
 	
 		fs.readFile('templates/tile.html', function(err, dataTile){
 			if(err){ throw err; }
