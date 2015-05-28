@@ -87,7 +87,7 @@ function createNewBlank(){
 			if(err){ throw err; }
 			console.log("Getting tile");
 			
-			var tileString = dataTile.toString();
+			var tileString = "\r\n" + dataTile.toString();
 			var allTiles = "";
 			
 			for(var i = 0; i < numberOfItems; i++){
@@ -114,8 +114,8 @@ function createNewBlank(){
 		var drawingString = "\r\nfunction draw(){\r\n"
 		
 		for(var i = 0; i < numberOfItems; i++){
-			jsString += canvasString.replace(/{TILENO}/g, i + "") + "\r\n";
-			drawingString += "drawTile" + i + "();\r\n";
+			jsString += canvasString.replace(/{TILENO}/g, i + "") + "\r\n\r\n";
+			drawingString += "\tdrawTile" + i + "();\r\n";
 		}
 		
 		drawingString += "window.requestAnimationFrame(draw);\r\n}\r\n\r\ndraw();";
