@@ -52,32 +52,89 @@ function room(canvas, ctx){
 	ctx.stroke();
 }
 
+var t = 0;
+
+function saw(x,y,canvas, ctx){
+	ctx.beginPath();
+	ctx.moveTo(x,y - 2);
+	ctx.lineTo(x - 5,y+7);
+	ctx.lineTo(x ,y+8)
+	ctx.lineTo(x+40,y+3);
+	ctx.lineTo(x+40,y - 3);
+	ctx.lineTo(x,y-2);
+	ctx,fillStyle="white";
+	ctx.fill();
+	//handle
+	ctx.moveTo(x+1,y);
+	ctx.lineTo(x+5,y);
+	ctx.lineTo(x + 1, y+6);
+	ctx.lineTo(x - 2, y+6);
+	ctx.lineTo(x+1,y);
+	ctx.moveTo(x + 9, y - 2);
+	ctx.lineTo(x + 2, y + 8);
+	ctx.stroke();
+}
+
+function wood(canvas,ctx){
+	ctx.beginPath();
+	ctx.moveTo(72,112);
+	ctx.lineTo(120,150);
+	ctx.lineTo(120,155);
+	ctx.lineTo(114,157);
+	ctx.lineTo(68,117);
+	ctx.lineTo(68,113);
+	ctx.lineTo(72,112);
+	ctx.fillStyle="brown";
+	ctx.fill();
+	ctx.moveTo(120,150);
+	ctx.lineTo(114,152);
+	ctx.lineTo(114,157);
+	ctx.moveTo(114,152);
+	ctx.lineTo(68,113);
+	ctx.stroke();
+	ctx.fillStyle="white";
+}
+
 function person(canvas, ctx){
+	t++;
 	ctx.beginPath();
 	ctx.strokeStyle="black";
+	var x = 30;
+	var y = 158;
 	//legs
-	ctx.moveTo(30,153);
-	ctx.lineTo(50,150);
-	ctx.lineTo(40,130);
-	ctx.moveTo(35,149);
-	ctx.lineTo(55,145);
-	ctx.lineTo(40,130);
+	ctx.moveTo(x,y);
+	ctx.lineTo(x+20,y-3);
+	ctx.lineTo(x+10,y-23);
+	
+	ctx.moveTo(x-4,y-8);
+	ctx.lineTo(x+17,y-12);
+	ctx.lineTo(x+10,y-23);
 	//trunk
-	ctx.lineTo(60,90);
-	//arms
-	ctx.moveTo(50,110);
-	ctx.lineTo(55,125);
-	ctx.lineTo(70,120);
+	ctx.lineTo(x+30,y-63);
+	//left arm
+	ctx.moveTo(x+20,y-43);
+	ctx.lineTo(x+31,y-35);
+	ctx.lineTo(x+50,y-37);
+	//right arm
+	ctx.moveTo(x+20,y-43);
+	ctx.lineTo(x+25 + 10 * Math.sin(t / 4),y-25 + 2 * Math.cos(t/2));
+	ctx.lineTo(x+42 + 10 * Math.sin(t / 4),y-28);
 	ctx.stroke();
 	
+	saw(x+42 + 10 * Math.sin(t / 4),y-28,canvas,ctx)
+	
+	//head
 	ctx.beginPath();
-	ctx.arc(60,90,15,0,2*Math.PI);
+	ctx.arc(x+30,y-63,15,0,2*Math.PI);
+	ctx.fillStyle="white";
 	ctx.fill();
+	ctx.stroke();
 }
 
 function drawTile2(){
 	ctx2.clearRect(0,0,canvas2.width, canvas2.height);
 	room(canvas2,ctx2);
+	wood(canvas2,ctx2);
 	person(canvas2,ctx2);
 }
 
