@@ -18,6 +18,23 @@
 		</script>
 	</head>
 	<body>
+		<script>
+			window.fbAsyncInit = function() {
+				FB.init({
+					appId      : '392233530963666',
+					xfbml      : true,
+					version    : 'v2.3'
+				});
+			};
+
+			(function(d, s, id){
+				var js, fjs = d.getElementsByTagName(s)[0];
+				if (d.getElementById(id)) {return;}
+				js = d.createElement(s); js.id = id;
+				js.src = "//connect.facebook.net/en_US/sdk.js";
+				fjs.parentNode.insertBefore(js, fjs);
+			}(document, 'script', 'facebook-jssdk'));
+		</script>
 		<div class="main-container">
 			<div class="header">Comic #2</div>
 			
@@ -49,6 +66,14 @@
 			
 			<div>Permanent link:</div>
 			<div class="link">www.michalpaszkiewicz.co.uk/comic/2</div>
+			<div>
+				<div
+					class="fb-like"
+					data-share="true"
+					data-width="450"
+					data-show-faces="true">
+				</div>
+			</div>
 			
 			<div class="footer-push"></div>
 		</div>
