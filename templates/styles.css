@@ -109,3 +109,8 @@ html, body{
 	display: inline-block;
 	border-radius: 5px;
 }
+
+.fb-box{
+	width: 100%;
+	overflow: auto;
+}
