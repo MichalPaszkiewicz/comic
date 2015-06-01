@@ -103,11 +103,14 @@ html, body{
 }
 
 .link{
-	margin: 10px;
+	margin: 10px 5px;
 	padding: 10px 20px;
 	background: rgb(188, 188, 215);
 	display: inline-block;
 	border-radius: 5px;
+	max-width: 80%;
+	word-wrap: break-word;
+	font-size: 14px;
 }
 
 .fb-box{
