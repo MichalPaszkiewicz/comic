@@ -50,7 +50,7 @@
 				moveParticles();
 				clearParticles();
 			
-				addParticle(20);
+				addParticle(5);
 				
 				ctx.clearRect(0,0, canvas.width, canvas.height);
 				
@@ -62,7 +62,7 @@
 				}
 				
 				
-				if(fireParticles.length > 50000){
+				if(fireParticles.length > 1000){
 					fireParticles.shift();
 				}	
 			}
