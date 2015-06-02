@@ -24,6 +24,7 @@
 			}
 			
 			function moveParticles(){
+				var newOnes = [];
 				for(var i = 0; i < fireParticles.length; i++){
 					fireParticles[i].y-= Math.random();
 					fireParticles[i].x += Math.random() / 2 + Math.sin(400 * fireParticles[i].alpha + Math.random()) / 2;
@@ -33,13 +34,8 @@
 					fireParticles[i].r = Math.max(0.5, fireParticles[i].r -= (canvas.height / (20 * fireParticles[i].y)) * Math.random());
 					fireParticles[i].green = Math.max(Math.round(fireParticles[i].green - Math.random()), 0);
 					fireParticles[i].alpha -= 0.0001;
-				}
-			}
-			
-			function clearParticles(){
-				var newOnes = [];
-				for(var i = 0; i < fireParticles.length; i++){
-					if(fireParticles[i].y > 0 && fireParticles[i].x < canvas.width + 30){
+					
+					if(fireParticles[i].y > 0 && fireParticles[i].x < canvas.width + 30){						
 						newOnes.push(fireParticles[i]);
 					}
 				}
@@ -48,15 +44,16 @@
 			
 			function frameOne(){
 				moveParticles();
-				clearParticles();
+				
+				var fpLength = fireParticles.length;
 			
-				if(fireParticles.length < 1000){
+				if(fpLength < 1000){
 					addParticle(1);
 				}
 				
 				ctx.clearRect(0,0, canvas.width, canvas.height);
 				
-				for(var i = 0; i < fireParticles.length; i++){	
+				for(var i = 0; i < fpLength; i++){	
 					ctx.beginPath();
 					ctx.arc(fireParticles[i].x,fireParticles[i].y,fireParticles[i].r,0, Math.PI * 2);
 					ctx.fillStyle = "rgba(" + fireParticles[i].red + "," + fireParticles[i].green + ",0," + fireParticles[i].alpha + ")";
@@ -64,7 +61,7 @@
 				}
 				
 				
-				if(fireParticles.length > 1000){
+				if(fpLength > 1000){
 					//fireParticles.shift();
 				}	
 			}
