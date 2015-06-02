@@ -50,7 +50,9 @@
 				moveParticles();
 				clearParticles();
 			
-				addParticle(5);
+				if(fireParticles.length < 1000){
+					addParticle(1);
+				}
 				
 				ctx.clearRect(0,0, canvas.width, canvas.height);
 				
@@ -63,7 +65,7 @@
 				
 				
 				if(fireParticles.length > 1000){
-					fireParticles.shift();
+					//fireParticles.shift();
 				}	
 			}
 			
@@ -208,7 +210,7 @@
 			
 			var rainParticles = [];
 			
-			for(var i = 0; i < 20; i++){
+			for(var i = 0; i < 18; i++){
 				rainParticles.push({x: canvas.width * (2 * Math.random()-1),y: canvas.height * Math.random(),r:1});
 			}
 			
@@ -239,7 +241,7 @@
 				for(var i = s; i < f; i++){
 					var rp = rainParticles[i];
 					
-					for(var j = 0; j < 12; j++){
+					for(var j = 0; j < 8; j++){
 						ctx3.beginPath();
 						var r = (200 - 3 * j);
 						var g = r;
