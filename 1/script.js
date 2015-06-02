@@ -42,12 +42,16 @@
 				fireParticles = newOnes;
 			}
 			
+			var addFire = false;
+			
 			function frameOne(){
 				moveParticles();
 				
+				addFire = !addFire;
+				
 				var fpLength = fireParticles.length;
 			
-				if(fpLength < 1000){
+				if(fpLength < 200 && addFire){
 					addParticle(1);
 				}
 				
@@ -58,11 +62,6 @@
 					ctx.arc(fireParticles[i].x,fireParticles[i].y,fireParticles[i].r,0, Math.PI * 2);
 					ctx.fillStyle = "rgba(" + fireParticles[i].red + "," + fireParticles[i].green + ",0," + fireParticles[i].alpha + ")";
 					ctx.fill();
-				}
-				
-				
-				if(fpLength > 1000){
-					//fireParticles.shift();
 				}	
 			}
 			
