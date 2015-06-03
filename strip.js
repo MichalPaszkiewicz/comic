@@ -49,7 +49,7 @@ function moveFiles(keepAll){
 			maxFile = parseInt(files[i]);
 		}
 		else{
-			if("strip.js, .git, LICENSE, templates, master.html, tile.html, canvas.js, 404.html".indexOf(files[i]) == -1){
+			if("strip.js, .git, LICENSE, templates, master.html, tile.html, canvas.js, 404.html, README.md".indexOf(files[i]) == -1){
 				otherFiles.push(files[i]);
 			}
 		}
