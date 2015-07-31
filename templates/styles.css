@@ -70,6 +70,19 @@ html, body{
 	left: 0;
 }
 
+.tile.white{
+	background: white;
+	border: solid 2px black;
+	box-sizing: border-box;
+}
+
+.tile.white .tile-text{
+	background: rgb(255, 252, 219);
+	margin: 8px;
+	box-sizing: border-box;
+	border: 1px solid;
+}
+
 .navigation{
 	margin: 10px;
 }

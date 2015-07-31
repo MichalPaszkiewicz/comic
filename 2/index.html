@@ -1,8 +1,8 @@
 <html>
 	<head>
-		<title>Adult Marketing</title>
+		<title>Outsourcing a project</title>
 		<link href="http://fonts.googleapis.com/css?family=Poiret+One" rel="stylesheet" type="text/css">
-		<meta name="description" content="You have a target market of serious adults. This is what you should do.">
+		<meta name="description" content="Why not to outsource your projects.">
 		<link href="styles.css" rel="stylesheet" type="text/css">
 		<link rel="image_src" href="default.png" />
 		<meta name="viewport" content="width=300, initial-scale=1.0">
@@ -36,7 +36,7 @@
 			}(document, 'script', 'facebook-jssdk'));
 		</script>
 		<div class="main-container">
-			<div class="header">Comic #3</div>
+			<div class="header">Comic #2</div>
 			
 			<div class="navigation">
 				<div class="button back" onclick="go('/comic/1')">&lArr;</div>
@@ -45,31 +45,27 @@
 				<div class="button forward" onclick="go('/comic')">&rArr;</div>
 			</div>
 			
-			<h1>Adult marketing</h1>
+			<h1>Outsourcing a project</h1>
 			
 			<div class="strip">
 
-				
-				<div class="tile white" title="Or at least pollute it.">
+				<div class="tile" title="There is also quantity, but you are supposed to assume that it is already factored in.">
 					<canvas id="canvas0" height=200 width=200></canvas>
-					<div class="tile-text">You have a very good product, that I'm sure adults will love.<br />
-					It is very well thought out, it has great aesthetics and it solves most everyday problems.<br />
-					This product could change the world.</div>		
-				</div>
-				<div class="tile white" title="The majority of adults will not want people to realise their childish hobbies are childish.">
+					<div class="tile-text">They say you can only pick two of these three:</div>		
+				</div>				
+				<div class="tile" title="* Failure is likely to happen anyway">
 					<canvas id="canvas1" height=200 width=200></canvas>
-					<div class="tile-text speech">But unfortunately, no serious adult will buy it.</div>	
-					<div class="tile-text speech bottom">HUH? What's wrong with it?</div>						
-				</div>
-				<div class="tile white" title="Make sure it has a 500 page manual">
-					<canvas id="canvas2" height=200 width=200></canvas>
-					<div class="tile-text bottom">You need to package it in a <b style="  background: wheat;">SERIOUS</b> box.</div>		
+					<div class="tile-text">But you don't realise that you are actually picking one of these:</div>		
+				</div>				
+				<div style="background: white; border: solid 2px black; box-sizing: border-box;" class="tile" title="It took us 5 years just to make the tools.">
+					<canvas style="left: -2px;top: -2px;" id="canvas2" height=200 width=200></canvas>
+					<div class="tile-text" style="background: rgb(255, 252, 219);  margin: 8px;box-sizing: border-box;border: 1px solid; ">And that's why we make everything in the office</div>		
 				</div>
 
 			</div>
 			
 			<div>Permanent link:</div>
-			<div class="link">www.michalpaszkiewicz.co.uk/comic/3</div>
+			<div class="link">www.michalpaszkiewicz.co.uk/comic/2</div>
 			<div class="fb-box">
 				<div
 					class="fb-like"
@@ -125,7 +121,7 @@
 					else if(url == -1){
 						//if moving back:
 						if(finalURL == "" || finalURL == "index.html"){
-							window.location = "/comic/" + 2;	
+							window.location = "/comic/" + 1;	
 						}
 						else if(parseInt(finalURL) == 1){
 							return;
