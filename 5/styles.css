@@ -1,0 +1,171 @@
+html, body{
+	height: 100%;
+	width: 100%;
+	margin: 0;
+	padding: 0;
+	font-family: 'Poiret One', cursive;
+	font-weight: 700;
+	text-align: center;
+}
+
+.main-container{
+	min-height: 100%;
+}
+
+.footer-push, .footer{
+	clear: both;
+	height: 50px;
+}
+
+.header, .footer, .footer a{
+	height: 50px;
+	background: black;
+	color: white;
+	text-decoration: none;
+	line-height: 50px;
+}
+
+.footer a:hover{
+	text-decoration: underline;
+}
+
+.header{
+	font-size: 30px;
+	text-align: center;
+}
+
+.footer{
+	margin-top: -50px;
+}
+
+.strip{
+	text-align: center;
+	margin: 50px;
+}
+
+.tile-text{
+	width: 180px;
+	margin: 10px;
+	position: absolute;
+	top: 0;
+	left: 0;
+	background: rgba(255,255,255,0.8);
+}
+
+.double .tile-text{
+	width:380px;
+}
+
+.tile-text.bottom{
+	bottom: 0;
+	top:inherit;
+}
+
+.tile{
+	position: relative;
+	width: 200px;
+	display:inline-block;
+	background: black;
+	height: 200px;
+	vertical-align: top;
+}
+
+.tile.double{
+	width: 400px;
+}
+
+.tile canvas, .tile img{
+	position: absolute;
+	left: 0;
+}
+
+.tile.white{
+	background: white;
+	border: solid 2px black;
+	box-sizing: border-box;
+}
+
+.tile.white .tile-text{
+	background: rgb(255, 252, 219);
+	margin: 8px;
+	box-sizing: border-box;
+	border: 1px solid;
+	padding: 4px;
+}
+
+.navigation{
+	margin: 10px;
+}
+
+.navigation .button{
+	margin: 5px;
+	display: inline-block;
+	background: rgb(67, 63, 63);
+	color: white;
+	padding: 5px 15px;
+	font-size: 30px;
+	border-radius: 5px;
+	cursor: pointer;
+	box-shadow: 0 0 2px 2px black;
+}
+
+.navigation .button:hover{
+	background: black;
+	box-shadow: 0 0 2px 1px black;;
+}
+
+.button.grey{
+	background: gray;
+	opacity: 0.3;
+	cursor: default;
+}
+
+.button.grey:hover{
+	background: gray;
+	box-shadow: 0 0 2px 2px black;
+}
+
+.link{
+	margin: 10px 5px;
+	padding: 10px 20px;
+	background: rgb(188, 188, 215);
+	display: inline-block;
+	border-radius: 5px;
+	max-width: 80%;
+	word-wrap: break-word;
+	font-size: 14px;
+}
+
+.fb-box{
+	width: 100%;
+	overflow: auto;
+}
+
+.tile .tile-text.speech{
+	background: none;
+	border: none;
+	width: 30%;
+	right: 0;
+	top: 90px;
+	left: auto;
+	font-size: 13px;
+	text-align: right;
+	color:white;
+}
+
+.tile .tile-text.speech.left{
+	left: 0;
+	right: auto;
+	text-align: left;
+}
+
+.tile .tile-text.speech.bottom{
+	right: initial;
+	left: 0;
+	text-align: left;
+}
+
+span.code{
+	font-family: "lucida console";
+	font-style: italic;
+}
