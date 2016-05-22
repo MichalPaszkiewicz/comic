@@ -52,6 +52,10 @@ html, body{
 	background: rgba(255,255,255,0.8);
 }
 
+.double .tile-text{
+	width:380px;
+}
+
 .tile-text.bottom{
 	bottom: 0;
 	top:inherit;
@@ -64,6 +68,10 @@ html, body{
 	background: black;
 	height: 200px;
 	vertical-align: top;
+}
+
+.tile.double{
+	width: 400px;
 }
 
 .tile canvas, .tile img{
@@ -136,11 +144,19 @@ html, body{
 .tile .tile-text.speech{
 	background: none;
 	border: none;
-	width: 60%;
+	width: 30%;
 	right: 0;
+	top: 90px;
 	left: auto;
 	font-size: 13px;
 	text-align: right;
+	color:white;
+}
+
+.tile .tile-text.speech.left{
+	left: 0;
+	right: auto;
+	text-align: left;
 }
 
 .tile .tile-text.speech.bottom{

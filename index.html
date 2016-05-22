@@ -1,11 +1,11 @@
 <html>
 	<head>
-		<title>Science of motivation</title>
+		<title>Realism</title>
 		<link href="http://fonts.googleapis.com/css?family=Poiret+One" rel="stylesheet" type="text/css">
-		<meta name="description" content="Motivation, brought to you by science">
+		<meta name="description" content="Realism">
 		<link href="styles.css" rel="stylesheet" type="text/css">
 		<link rel="image_src" href="default.png" />
-		<meta name="viewport" content="width=300, initial-scale=1.0">
+		<meta name="viewport" content="width=500, initial-scale=1.0">
 		<script>
 			(function (i, s, o, g, r, a, m) {
             i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
@@ -36,7 +36,7 @@
 			}(document, 'script', 'facebook-jssdk'));
 		</script>
 		<div class="main-container">
-			<div class="header">Comic #4</div>
+			<div class="header">Comic #5</div>
 			
 			<div class="navigation">
 				<div class="button back" onclick="go('/comic/1')">&lArr;</div>
@@ -45,40 +45,25 @@
 				<div class="button forward" onclick="go('/comic')">&rArr;</div>
 			</div>
 			
-			<h1>The Science of Motivation</h1>
+			<h1>Realism</h1>
 			
 			<div class="strip">
 
 				
-				<div class="tile white">
-					<canvas id="canvas0" height=200 width=200 title="unless you want to stay in orbit."></canvas>
-					<div class="tile-text">When gravity pulls you down...</div>		
-					<div class="tile-text bottom">you just need a bit more air resistance.</div>
+				<div class="tile double" title="happiness = (your estimated outcome) ^ 2 + (actual outcome)">
+					<canvas id="canvas0" height=200 width=400></canvas>	
+					<div class="tile-text speech left">"with low expectations, every result is a pleasant surprise"</div>
+					<div class="tile-text speech">"even if everything goes wrong, it can be turned for the better"</div>
 				</div>
-				<div class="tile">
-					<canvas id="canvas1" height=200 width=200 title="however, they also suck the joy out of you."></canvas>
-					<div class="tile-text">If you are feeling dark, remember...</div>		
-					<div class="tile-text bottom">even black holes give out some radiation.</div>
+				<div class="tile white" title='Depression and Pessimism are mutually exclusive. Consider that most people who self harm must surely be expecting a positive outcome.'>
+					<canvas id="canvas1" height=200 width=200></canvas>
+					<div class="tile-text" style="top:50px">Everyone around me seems happier than me, so I must be a realist.</div>		
 				</div>
-				<div class="tile white">
-					<canvas id="canvas2" height=200 width=200 title="if butterflies are causing hurricanes, you need to be staying veeeeery still..."></canvas>
-					<div class="tile-text">If a butterfly's wings can affect the weather...</div>	
-					<div class="tile-text bottom">you can do so much more just by getting out of bed.</div>	
-				</div>
-				<div class="tile white">
-					<canvas id="canvas3" height=200 width=200 title="but if you are doing worse every iteration, you need to try something else."></canvas>
-					<div class="tile-text">If you can't do it at <span class="code">t</span>...</div>		
-					<div class="tile-text bottom">do it at <span class="code">t + 1</span>.</div>	
-				</div>
-				<div class="tile white">
-					<canvas id="canvas4" height=200 width=200 title="this formula was invented by the babylonians, yet most people these days won't have a clue how to get a square root without a calculator."></canvas>
-					<div class="tile-text">If you don't take the limit of your function to <span class="code">&infin;</span> ...</div>		
-					<div class="tile-text bottom">You might not converge on the goal you want.</div>	
-				</div>
+
 			</div>
 			
 			<div>Permanent link:</div>
-			<div class="link">www.michalpaszkiewicz.co.uk/comic/4</div>
+			<div class="link">www.michalpaszkiewicz.co.uk/comic/5</div>
 			<div class="fb-box">
 				<div
 					class="fb-like"
@@ -134,7 +119,7 @@
 					else if(url == -1){
 						//if moving back:
 						if(finalURL == "" || finalURL == "index.html"){
-							window.location = "/comic/" + 3;	
+							window.location = "/comic/" + 4;	
 						}
 						else if(parseInt(finalURL) == 1){
 							return;
